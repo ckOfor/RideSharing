@@ -43,3 +43,23 @@
     (ok ride-id)
   )
 )
+
+(define-public (accept-ride (ride-id uint))
+  (let
+    ((ride (unwrap! (map-get? rides ride-id) err-not-found)))
+    (asserts! (is-some (map-get? users tx-sender)) err-not-found)
+    (asserts! (is-none (get driver ride)) err-already-exists)
+    (ok (map-set rides ride-id
+      (merge ride { driver: (some tx-sender), status: "accepted" })
+    ))
+  )
+)
+
+;; Read-only functions
+(define-read-only (get-ride (ride-id uint))
+  (map-get? rides ride-id)
+)
+
+(define-read-only (is-user-registered (user principal))
+  (is-some (map-get? users user))
+)
