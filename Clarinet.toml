@@ -5,6 +5,11 @@ authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
+[contracts.ride-rating]
+path = 'contracts/ride-rating.clar'
+clarity_version = 2
+epoch = 2.5
+
 [contracts.ride-sharing]
 path = 'contracts/ride-sharing.clar'
 clarity_version = 2
